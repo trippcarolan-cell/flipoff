@@ -19,6 +19,14 @@ export const ACCENT_COLORS = [
   '#00AAFF', '#00FFCC'
 ];
 
+export const WEEKEND_START_DAY = 5;
+export const WEEKEND_START_HOUR = 17;
+export const WEEKEND_START_MINUTE = 0;
+
+export const WEEKEND_END_DAY = 1;
+export const WEEKEND_END_HOUR = 0;
+export const WEEKEND_END_MINUTE = 0;
+
 export const MESSAGES = [
   [
     '',

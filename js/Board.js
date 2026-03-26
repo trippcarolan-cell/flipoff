@@ -48,29 +48,6 @@ export class Board {
     this.rightBar = this._createAccentBar('accent-bar-right');
     this.boardEl.appendChild(this.rightBar);
 
-    // Keyboard hint icon (bottom-left)
-    const hint = document.createElement('div');
-    hint.className = 'keyboard-hint';
-    hint.textContent = 'N';
-    hint.title = 'Keyboard shortcuts';
-    hint.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const overlay = this.boardEl.querySelector('.shortcuts-overlay');
-      if (overlay) overlay.classList.toggle('visible');
-    });
-    this.boardEl.appendChild(hint);
-
-    // Shortcuts overlay
-    const overlay = document.createElement('div');
-    overlay.className = 'shortcuts-overlay';
-    overlay.innerHTML = `
-      <div><span>Next message</span><kbd>Enter</kbd></div>
-      <div><span>Previous</span><kbd>\u2190</kbd></div>
-      <div><span>Fullscreen</span><kbd>F</kbd></div>
-      <div><span>Mute</span><kbd>M</kbd></div>
-    `;
-    this.boardEl.appendChild(overlay);
-
     containerEl.appendChild(this.boardEl);
     this._updateAccentColors();
   }
@@ -139,7 +116,7 @@ export class Board {
   _formatToGrid(lines) {
     const grid = [];
     for (let r = 0; r < this.rows; r++) {
-      const line = (lines[r] || '').toUpperCase();
+      const line = (lines[r] || '').toUpperCase().slice(0, this.cols);
       const padTotal = this.cols - line.length;
       const padLeft = Math.max(0, Math.floor(padTotal / 2));
       const padded = ' '.repeat(padLeft) + line + ' '.repeat(Math.max(0, this.cols - padLeft - line.length));

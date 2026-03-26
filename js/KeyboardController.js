@@ -1,6 +1,5 @@
 export class KeyboardController {
-  constructor(rotator, soundEngine) {
-    this.rotator = rotator;
+  constructor(soundEngine) {
     this.soundEngine = soundEngine;
 
     document.addEventListener('keydown', (e) => this._handleKey(e));
@@ -11,24 +10,10 @@ export class KeyboardController {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
     switch (e.key) {
-      case 'Enter':
-      case ' ':
-        e.preventDefault();
-        this.rotator.next();
-        break;
-
-      case 'ArrowRight':
-        e.preventDefault();
-        this.rotator.next();
-        break;
-
-      case 'ArrowLeft':
-        e.preventDefault();
-        this.rotator.prev();
-        break;
-
       case 'f':
       case 'F':
+      case 'Enter':
+      case ' ':
         e.preventDefault();
         this._toggleFullscreen();
         break;
@@ -46,9 +31,6 @@ export class KeyboardController {
         if (document.fullscreenElement) {
           document.exitFullscreen();
         }
-        // Also hide shortcuts overlay
-        const overlay = document.querySelector('.shortcuts-overlay');
-        if (overlay) overlay.classList.remove('visible');
         break;
     }
   }
